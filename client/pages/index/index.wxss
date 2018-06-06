@@ -1,25 +1,36 @@
-@import "../../wxui.wxss";
-
 /**index.wxss**/
+
 page {
-    background: #F6F6F6;
-    display: flex;
     flex-direction: column;
-    justify-content:center;
+   background-color: #f1f1f1;
 }
 
-.userinfo, .uploader, .tunnel {
-    margin-top: 40rpx;
-    height: 140rpx;
-    width: 100%;
-    background: #FFF;
-    border: 1px solid rgba(0, 0, 0, .1);
-    border-left: none;
-    border-right: none;
+button{
+    margin: 20rpx;
+}
+
+.container{
+    margin: 20rpx;
+}
+
+.userinfo,
+.uploader,
+.tunnel {
+    margin: 20rpx;
     display: flex;
-    flex-direction: row;
-    justify-content:center;
+    flex-direction: column;
+    align-items: center;
+    
     transition: all 300ms ease;
+}
+.picker{
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    
+    padding: 20rpx;
+    background: #ffffff;
+    margin-bottom: 30rpx;
+    margin-top: 30rpx;
 }
 .players {
     margin-top: 0rpx;
@@ -35,12 +46,13 @@ page {
     align-items: center;
     transition: all 300ms ease;
 }
+
 .userinfo-avatar {
-    width: 100rpx;
-    height: 100rpx;
+    width: 200rpx;
+    height: 200rpx;
     margin: 20rpx;
     display: flex;
-    justify-content:center;
+    justify-content: center;
     border-radius: 50%;
 }
 
@@ -49,7 +61,8 @@ page {
     color: #007AFF;
 }
 
-.uploader, .tunnel {
+.uploader,
+.tunnel {
     height: auto;
     padding: 0 0 0 40rpx;
     flex-direction: column;
@@ -57,7 +70,8 @@ page {
     box-sizing: border-box;
 }
 
-.uploader-text, .tunnel-text {
+.uploader-text,
+.tunnel-text {
     width: 100%;
     line-height: 52px;
     font-size: 34rpx;
@@ -140,6 +154,6 @@ page {
     word-break: break-all;
 }
 
-.flex-wrp{
-  display: flex;
+.flex-wrp {
+    display: flex;
 }

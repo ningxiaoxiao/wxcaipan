@@ -13,24 +13,28 @@ Page({
     rank: 0,
     teamId: 0,
     players: []
-   
+  },
+  onShow: function () {
+    //得到比赛场次
+    //this.getMatchs();
   },
   changeKills(no, i) {
-
     var tno = parseInt(no);
     var tnostr = 'players[' + tno + '].matchkills';
     var cur = this.data.players[tno].matchkills;
-    this.setData({ [tnostr]: cur + i })
+    this.setData({
+      [tnostr]: cur + i
+    })
   },
-  judgment:function(e){
+  judgment: function (e) {
     //设置当前比赛
     console.log(e)
-    this.setData({ 
+    this.setData({
       curmatch: e.target.dataset.id,
-    showlist:true})
-
+      showlist: true
+    })
   },
-  getmatchs(){
+  getMatchs() {
     //从服务器得到比赛
     var that = this;
     util.showBusy('拉取比赛中')
@@ -38,9 +42,8 @@ Page({
       url: `${config.service.host}/weapp/getmatchs`,
       success(res) {
         util.showSuccess('成功')
-
         that.setData({
-          matchs:res.data.data
+          matchs: res.data.data
         })
       },
       fail(err) {
@@ -56,7 +59,7 @@ Page({
     this.changeKills(e.target.id, 1)
   },
   subkills: function (e) {
-    this.changeKills(e.target.id,-1)
+    this.changeKills(e.target.id, -1)
   },
   updateteamId: function (e) {
     console.log(e)
@@ -67,7 +70,7 @@ Page({
 
   onLoad: function () {
     var tmp = new Array(100);
-    
+
     for (var i = 1; i < 101; i++) {
       tmp[i] = i;
     }
@@ -93,17 +96,17 @@ Page({
       matchid: this.data.curmatch,
       teamid: this.data.teamId,
       data: this.data.players,
-      openid: this.data.userInfo.openId,  
-      }
-   console.log(sendData)
+      openid: this.data.userInfo.openId,
+    }
+    console.log(sendData)
     var that = this;
     util.showBusy('发送中')
     qcloud.request({
       url: `${config.service.host}/weapp/send`,
       method: 'POST',
       data: sendData,
-      success(res) { 
-        util.showSuccess('发送成功') 
+      success(res) {
+        util.showSuccess('发送成功')
         that.getPlayers()
       },
       fail(err) {
@@ -111,10 +114,9 @@ Page({
         console.log('request fail', error);
       },
     })
-  }
-  ,
+  },
   getPlayers: function () {
- 
+
     //得到队
 
     //先得到队伍.找出当场比赛 的信息
@@ -124,37 +126,38 @@ Page({
       url: `${config.service.host}/weapp/getTeam`,
       login: false,
       //带的信息
-      data: { 
+      data: {
         id: this.data.teamId,
-        matchid:this.data.curmatch},
+        matchid: this.data.curmatch
+      },
       success(result) {
         util.showSuccess('请求成功完成')
 
         var players = result.data.data.players;
         var rank = result.data.data.rank;
-        if(rank){
+        if (rank) {
           that.setData({
             rank: rank
           })
-        }else{
+        } else {
           that.setData({
             rank: 0
           })
         }
-        
+
         var kills = result.data.data.kills;
 
         //把击杀更新到players中
 
-        players.forEach(function(i,index,input){
+        players.forEach(function (i, index, input) {
           i['matchkills'] = 0;
           //在击杀中查找 有没有击杀,更新到击杀中
-          kills.forEach(function(kitem,kindex,kinput){
-            if(kitem.playerid==i.playerid){
+          kills.forEach(function (kitem, kindex, kinput) {
+            if (kitem.playerid == i.playerid) {
               i['matchkills'] = kitem.kills;
-              }
+            }
           })
-          input[index]=i;
+          input[index] = i;
         })
         that.setData({
           players: players
@@ -168,9 +171,9 @@ Page({
 
   },
   loginSucces() {
-    util.showSuccess('登录成功')
-    this.getmatchs();
 
+    util.showSuccess('登录成功')
+    this.getMatchs();
 
   },
   // 用户登录示例
@@ -216,7 +219,7 @@ Page({
       },
 
       fail(error) {
-        util.showModel('登录失败', error)
+        util.showModel('登录失败2', error)
         console.log('登录失败', error)
       }
     })
@@ -248,9 +251,9 @@ Page({
         console.log('request fail', error);
       }
     }
-    if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
+    if (this.data.takeSession) { // 使用 qcloud.request 带登录态登录
       qcloud.request(options)
-    } else {    // 使用 wx.request 则不带登录态
+    } else { // 使用 wx.request 则不带登录态
       wx.request(options)
     }
   },
@@ -324,13 +327,17 @@ Page({
     tunnel.on('connect', () => {
       util.showSuccess('信道已连接')
       console.log('WebSocket 信道已连接')
-      this.setData({ tunnelStatus: 'connected' })
+      this.setData({
+        tunnelStatus: 'connected'
+      })
     })
 
     tunnel.on('close', () => {
       util.showSuccess('信道已断开')
       console.log('WebSocket 信道已断开')
-      this.setData({ tunnelStatus: 'closed' })
+      this.setData({
+        tunnelStatus: 'closed'
+      })
     })
 
     tunnel.on('reconnecting', () => {
@@ -357,7 +364,9 @@ Page({
     // 打开信道
     tunnel.open()
 
-    this.setData({ tunnelStatus: 'connecting' })
+    this.setData({
+      tunnelStatus: 'connecting'
+    })
   },
 
   /**
@@ -382,6 +391,8 @@ Page({
       this.tunnel.close();
     }
     util.showBusy('信道连接中...')
-    this.setData({ tunnelStatus: 'closed' })
+    this.setData({
+      tunnelStatus: 'closed'
+    })
   }
 })
