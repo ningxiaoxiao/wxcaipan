@@ -1,9 +1,10 @@
 <!-- index.wxml
 用来显示比赛列表,显示当前有多少场比赛 -->
 <view class="container">
-  <view class="userinfo" bindtap="login">
+  <view class="userinfo">
     <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{logged?userInfo.nickName:'登录'}}</text>
+    <text class="userinfo-nickname">{{logged?userInfo.nickName:'请登录'}}</text>
+    <button class="btn" wx:if="{{!logged}}" type="primary" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" >登录 </button>
   </view>
   <view class="section">
     <view class="section__title">选择比赛</view>

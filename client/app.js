@@ -1,5 +1,5 @@
 //app.js
-var qcloud = require('./vendor/wafer2-client-sdk/index')
+var qcloud = require('./node/wafer2-client-sdk/index.js')
 var config = require('./config')
 
 App({

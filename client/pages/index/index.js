@@ -1,5 +1,5 @@
 //index.js
-var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var qcloud = require('../../node/wafer2-client-sdk/index.js')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 
@@ -176,9 +176,17 @@ Page({
     this.getMatchs();
 
   },
+  onGotUserInfo: function (e) {
+    this.setData({
+      userResult: e,
+    })
+    this.login();
+  },
   // 用户登录示例
   login: function () {
+
     if (this.data.logged) return
+
 
     util.showBusy('正在登录')
     var that = this
@@ -186,40 +194,14 @@ Page({
     // 调用登录接口
     qcloud.login({
       success(result) {
-        if (result) {
-          console.log("not")
-          console.log(result)
-
-          that.setData({
-            userInfo: result,
-            logged: true
-          })
-          that.loginSucces()
-        } else {
-          // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
-          qcloud.request({
-            url: config.service.requestUrl,
-            login: true,
-            success(result) {
-              console.log(result)
-
-              that.setData({
-                userInfo: result.data.data,
-                logged: true
-              })
-              that.loginSucces()
-            },
-
-            fail(error) {
-              util.showModel('请求失败', error)
-              console.log('request fail', error)
-            }
-          })
-        }
+        that.setData({
+          userInfo: result,
+          logged: true
+        })
+        that.loginSucces()
       },
-
       fail(error) {
-        util.showModel('登录失败2', error)
+        util.showModel('登录失败', error)
         console.log('登录失败', error)
       }
     })

@@ -13,5 +13,6 @@
 	"appid": "wx3e02c0bcf121e5d7",
 	"projectname": "%E8%A3%81%E5%88%A4%E8%AE%A1%E5%88%86",
 	"compileType": "miniprogram",
+	"libVersion": "2.0.9",
 	"condition": {}
 }
