@@ -1,4 +1,6 @@
-const { mysql: config } = require('../config')
+const {
+  mysql: config
+} = require('../config')
 
 module.exports = async ctx => {
   const DB = require('knex')({
@@ -18,7 +20,7 @@ module.exports = async ctx => {
 
   //更新所有增加的击杀
   //删除这场比赛 这队所有人记录
-  
+
   await DB('kills').where({
     teamid: data.teamid,
     matchid: data.matchid
@@ -41,9 +43,9 @@ module.exports = async ctx => {
     })
   })
 
- 
 
- await DB('kills').insert(wiiladdkillsdata)
+
+  await DB('kills').insert(wiiladdkillsdata)
 
 
 

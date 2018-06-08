@@ -9,23 +9,15 @@ Page({
     logged: false,
     takeSession: false,
     requestResult: '',
-    rankArray: new Array(100),
-    rank: 0,
+    matchIndex: 0,
     teamId: 0,
     players: []
   },
   onShow: function () {
     //得到比赛场次
-    //this.getMatchs();
+    this.getMatchs();
   },
-  changeKills(no, i) {
-    var tno = parseInt(no);
-    var tnostr = 'players[' + tno + '].matchkills';
-    var cur = this.data.players[tno].matchkills;
-    this.setData({
-      [tnostr]: cur + i
-    })
-  },
+
   judgment: function (e) {
     //设置当前比赛
     console.log(e)
@@ -34,14 +26,14 @@ Page({
       showlist: true
     })
   },
-  getMatchs() {
+  getMatchs: function () {
     //从服务器得到比赛
     var that = this;
     util.showBusy('拉取比赛中')
     qcloud.request({
       url: `${config.service.host}/weapp/getmatchs`,
       success(res) {
-        util.showSuccess('成功')
+        util.showSuccess('拉取比赛成功')
         that.setData({
           matchs: res.data.data
         })
@@ -55,35 +47,13 @@ Page({
 
 
   },
-  matchkills: function (e) {
-    this.changeKills(e.target.id, 1)
-  },
-  subkills: function (e) {
-    this.changeKills(e.target.id, -1)
-  },
-  updateteamId: function (e) {
-    console.log(e)
-    this.setData({
-      teamId: e.detail.value
-    })
-  },
+
 
   onLoad: function () {
-    var tmp = new Array(100);
-
-    for (var i = 1; i < 101; i++) {
-      tmp[i] = i;
-    }
-    this.setData({
-      rankArray: tmp
-    })
-    console.log(this.data.rankArray[22])
   },
-  bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-
+  bindMatchChange: function (e) {
     this.setData({
-      rank: e.detail.value
+      matchIndex: e.detail.value
     })
   },
   //发送分数
@@ -115,61 +85,7 @@ Page({
       },
     })
   },
-  getPlayers: function () {
 
-    //得到队
-
-    //先得到队伍.找出当场比赛 的信息
-    util.showBusy('拉取中')
-    var that = this
-    qcloud.request({
-      url: `${config.service.host}/weapp/getTeam`,
-      login: false,
-      //带的信息
-      data: {
-        id: this.data.teamId,
-        matchid: this.data.curmatch
-      },
-      success(result) {
-        util.showSuccess('请求成功完成')
-
-        var players = result.data.data.players;
-        var rank = result.data.data.rank;
-        if (rank) {
-          that.setData({
-            rank: rank
-          })
-        } else {
-          that.setData({
-            rank: 0
-          })
-        }
-
-        var kills = result.data.data.kills;
-
-        //把击杀更新到players中
-
-        players.forEach(function (i, index, input) {
-          i['matchkills'] = 0;
-          //在击杀中查找 有没有击杀,更新到击杀中
-          kills.forEach(function (kitem, kindex, kinput) {
-            if (kitem.playerid == i.playerid) {
-              i['matchkills'] = kitem.kills;
-            }
-          })
-          input[index] = i;
-        })
-        that.setData({
-          players: players
-        })
-      },
-      fail(error) {
-        util.showModel('请求失败', error);
-        console.log('request fail', error);
-      }
-    })
-
-  },
   loginSucces() {
 
     util.showSuccess('登录成功')
@@ -184,10 +100,7 @@ Page({
   },
   // 用户登录示例
   login: function () {
-
     if (this.data.logged) return
-
-
     util.showBusy('正在登录')
     var that = this
 
@@ -204,6 +117,11 @@ Page({
         util.showModel('登录失败', error)
         console.log('登录失败', error)
       }
+    })
+  },
+  goreferee: function () {
+    wx.navigateTo({
+      url: "../referee/referee?matchid=" + this.data.matchs[this.data.matchIndex].id
     })
   },
 

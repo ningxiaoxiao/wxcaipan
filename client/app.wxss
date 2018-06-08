@@ -1,2 +1,23 @@
 /**app.wxss**/
 
+page {
+    flex-direction: column;
+   background-color: #f1f1f1;
+}
+
+button{
+    margin: 20rpx;
+}
+
+.container{
+    margin: 20rpx;
+}
+.picker{
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    
+    padding: 20rpx;
+    background: #ffffff;
+    margin-bottom: 30rpx;
+    margin-top: 30rpx;
+}

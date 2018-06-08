@@ -1,0 +1,11 @@
+<!-- referee.wxml
+ -->
+<view class="container">
+  <view class="section">
+    <view>选择队伍</view>
+    <picker bindchange="bindPickerTeamChange"  range-key="name" value="{{curTeamid}}" range="{{allTeams}}">
+      <view class="picker">当前选择：{{allTeams[curTeamid].name}}</view>
+    </picker>
+  </view>
+  <button type="primary" bindtap="goTeam">确认</button>
+</view>

@@ -1,14 +1,16 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/addCgi/addCgi",
-    "pages/setMatch/setMatch"
+    "pages/setMatch/setMatch",
+    "pages/referee/referee",
+    "pages/referee/team"
   ],
-  "window":{
-    "backgroundColor":"#F6F6F6",
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "计分系统",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   }
 }

@@ -1,0 +1,22 @@
+<view class="container">
+  <view>{{'战队名:'+players[0].tname}}</view>
+  <view class="section">
+    <picker bindchange="bindRoundIndexChange" value="{{roundindex}}" range="{{round}}" range-key="name">
+      <view class="picker">进程:{{round[roundindex].name}}</view>
+    </picker>
+  </view>
+  <!-- team rank -->
+  <view>
+    排名:
+    <input bindinput="onrankinputchange" maxlength="2" value="{{rank}}" type="number" placeholder="点击输入本场排名" />
+    <button bindtap="updaterank" size="mini" type="warn">更新</button>
+  </view>
+  <!-- 四个选手 -->
+  <view class="players" wx:for="{{players}}" wx:key="{{players}}">
+    {{item.pname}}
+    <button id="{{index}}" bindtap="subkills" size="mini" type="warn">- 1</button>
+    {{item.kills+'K'}}
+    <button id="{{index}}" bindtap="matchkills" size="mini" type="primary">+1</button>
+  </view>
+  <button type="primary" bindtap="send">提交</button>
+</view>

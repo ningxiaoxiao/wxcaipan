@@ -4,50 +4,24 @@
   <view class="userinfo">
     <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{logged?userInfo.nickName:'请登录'}}</text>
-    <button class="btn" wx:if="{{!logged}}" type="primary" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" >登录 </button>
+    
+    <button class="btn" wx:if="{{!logged}}" type="primary" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">
+      登录
+    </button>
   </view>
   <view class="section">
-    <view class="section__title">选择比赛</view>
-    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-      <view class="picker">当前选择：{{matchs[index]}}</view>
+    <view>选择比赛</view>
+    <picker bindchange="bindMatchChange" value="{{matchIndex}}" range="{{matchs}}" range-key="name">
+      <view class="picker">当前选择：{{matchs[matchIndex].name}}</view>
     </picker>
   </view>
   <view>
     <view>
       <button bindtap="login" type="primary">我是选手</button>
-      <button>我是裁判</button>
+      <button bindtap="goreferee">我是裁判</button>
     </view>
   </view>
-  <!-- team rank -->
-  <view wx:if="{{showlist}}">
-    <view class="weui-cell weui-cell_input">
-      <input type="number" placeholder="点击输入队伍编号1~99" bindinput="updateteamId" />
-      <button size="mini" type="primary" bindtap="getPlayers">确认</button>
-    </view>
-    <view class="weui-cells">
-      <view class="weui-cell__hd">{{players[0].teamname}}</view>
-    </view>
-    <view class="weui-cells">
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">本场排名</view>
-        </view>
-        <view class="weui-cell__bd">
-          <picker bindchange="bindPickerChange" value="{{rank}}" range="{{rankArray}}">
-            <view class="weui-input">{{rankArray[rank]}}</view>
-          </picker>
-        </view>
-      </view>
-    </view>
-    <!-- 四个选手 -->
-    <view class="players" wx:for="{{players}}" wx:key="{{playerno}}">
-      {{item.name}} :   {{item.kills}}
-      <button id="{{index}}" bindtap="subkills" size="mini" type="warn">- 1</button>
-      {{item.matchkills+' kills'}}
-      <button id="{{index}}" bindtap="matchkills" size="mini" type="primary">+1</button>
-    </view>
-    <button type="primary" bindtap="send">提交</button>
-  </view>
+
   <!-- 信道连接测试 
   <view class="tunnel">
     <view class="tunnel-text">
