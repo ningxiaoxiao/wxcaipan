@@ -1,44 +1,96 @@
 /**app.wxss**/
 
 page {
-    
     background-color: #f1f1f1;
 }
 
 button {
-    margin: 20rpx;
+    margin: 20rpx 40rpx 20rpx 40rpx;
 }
 
 .container {
-    padding: 20rpx;
     display: flex;
     flex-direction: column;
-   width: 700rpx;
 }
+
+.rank,
 .picker {
     display: flex;
-    
-   
-    padding-bottom: 10rpx;
-    padding-top: 10rpx;
-    background: #fd0000;
+    background: #fff;
+    align-items: center;
+    margin: 10rpx 0rpx 10rpx 0rpx;
 }
 
 .pickerhead {
-    
     color: #999;
-    width: 20%;
-    
-    background: #000;
-
+    width: 25%;
+    text-align: center;
+    padding: 20rpx 0rpx 20rpx 0rpx;
 }
 
 .pickercontent {
-    background: #35569c;
-    
-    width: 80%;
-   
-    justify-content: center;
-    align-items: center;
     text-align: center;
+    width: 50%
+}
+
+.rankcontent {
+    text-align: center;
+    width: 50%;
+}
+
+.subkill,
+.pluskill,
+.knockout,
+.updaterank {
+    background: rgb(240, 67, 70);
+    color: #eee;
+    height: 100%;
+    width: 15%;
+    text-align: center;
+    padding: 20rpx 0 20rpx 0;
+    align-self: flex-end;
+    margin-left: 10%;
+    border: 1rpx solid rgb(216, 60, 63)
+}
+
+.subkill,
+.pluskill{
+    margin-left: 0;
+    border: none;
+}
+.knockout{
+    margin-left: 0;
+}
+.subkill{
+    background: rgb(0, 174, 251);
+    border: 1rpx solid rgb(0, 123, 175);
+}
+.pluskill{
+    background: rgb(255, 191, 52);
+    border: 1rpx solid rgb(187, 140, 39);
+}
+
+
+
+
+.playerlist {
+    background: #FFF;
+    border: 1rpx solid rgba(0, 0, 0, .1);
+    display: flex;
+    flex-direction: column;
+}
+
+.player {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.playername {
+    width: 25%;
+    margin: 20rpx;
+}
+
+.kills {
+    width: 25%;
 }
