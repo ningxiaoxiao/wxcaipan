@@ -1,23 +1,44 @@
 /**app.wxss**/
 
 page {
-    flex-direction: column;
-   background-color: #f1f1f1;
-}
-
-button{
-    margin: 20rpx;
-}
-
-.container{
-    margin: 20rpx;
-}
-.picker{
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
     
+    background-color: #f1f1f1;
+}
+
+button {
+    margin: 20rpx;
+}
+
+.container {
     padding: 20rpx;
-    background: #ffffff;
-    margin-bottom: 30rpx;
-    margin-top: 30rpx;
+    display: flex;
+    flex-direction: column;
+   width: 700rpx;
+}
+.picker {
+    display: flex;
+    
+   
+    padding-bottom: 10rpx;
+    padding-top: 10rpx;
+    background: #fd0000;
+}
+
+.pickerhead {
+    
+    color: #999;
+    width: 20%;
+    
+    background: #000;
+
+}
+
+.pickercontent {
+    background: #35569c;
+    
+    width: 80%;
+   
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

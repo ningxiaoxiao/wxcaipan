@@ -9,19 +9,18 @@
       登录
     </button>
   </view>
-  <view class="section">
-    <view>选择比赛</view>
-    <picker bindchange="bindMatchChange" value="{{matchIndex}}" range="{{matchs}}" range-key="name">
-      <view class="picker">当前选择：{{matchs[matchIndex].name}}</view>
-    </picker>
-  </view>
+  
+  <picker class="picker" bindchange="bindMatchChange" value="{{matchIndex}}" range="{{matchs}}" range-key="name">
+    <div class="pickerhead">比赛:</div>
+    <div class="pickercontent">{{matchs[matchIndex].name}}</div>
+  </picker>
+
   <view>
     <view>
       <button bindtap="login" type="primary">我是选手</button>
       <button bindtap="goreferee">我是裁判</button>
     </view>
   </view>
-
   <!-- 信道连接测试 
   <view class="tunnel">
     <view class="tunnel-text">

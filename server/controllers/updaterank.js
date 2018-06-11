@@ -1,20 +1,6 @@
-const {
-    mysql: config
-} = require('../config')
+DB=require('../db')
 
 module.exports = async ctx => {
-    const DB = require('knex')({
-        client: 'mysql',
-        connection: {
-            host: config.host,
-            port: config.port,
-            user: config.user,
-            password: config.pass,
-            database: 'caipan',
-            charset: config.char,
-            multipleStatements: true
-        }
-    })
 
     var data = ctx.request.body
 

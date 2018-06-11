@@ -14,7 +14,6 @@ Page({
     players: []
   },
   onShow: function () {
-    //得到比赛场次
     this.getMatchs();
   },
 
@@ -29,11 +28,11 @@ Page({
   getMatchs: function () {
     //从服务器得到比赛
     var that = this;
-    util.showBusy('拉取比赛中')
+
     qcloud.request({
       url: `${config.service.host}/weapp/getmatchs`,
+      login: false,
       success(res) {
-        util.showSuccess('拉取比赛成功')
         that.setData({
           matchs: res.data.data
         })
@@ -42,15 +41,9 @@ Page({
         util.showModel('拉取失败', error);
         console.log('request fail', error);
       },
-
     })
-
-
   },
-
-
-  onLoad: function () {
-  },
+  onLoad: function () {},
   bindMatchChange: function (e) {
     this.setData({
       matchIndex: e.detail.value
@@ -87,10 +80,7 @@ Page({
   },
 
   loginSucces() {
-
     util.showSuccess('登录成功')
-    this.getMatchs();
-
   },
   onGotUserInfo: function (e) {
     this.setData({
@@ -124,7 +114,13 @@ Page({
       url: "../referee/referee?matchid=" + this.data.matchs[this.data.matchIndex].id
     })
   },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    this.getMatchs()
 
+  },
   // 切换是否带有登录态
   switchRequestMode: function (e) {
     this.setData({

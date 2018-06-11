@@ -1,6 +1,4 @@
-const {
-  mysql: config
-} = require('../config')
+DB=require('../db')
 
 module.exports = async ctx => {
   var id = ctx.query.id;
@@ -8,18 +6,7 @@ module.exports = async ctx => {
   var rid = ctx.query.roundid;
   var retData = {};
 
-  const DB = require('knex')({
-    client: 'mysql',
-    connection: {
-      host: config.host,
-      port: config.port,
-      user: config.user,
-      password: config.pass,
-      database: 'caipan',
-      charset: config.char,
-      multipleStatements: true
-    }
-  })
+
 
   //找出队伍和选手
   await DB.select(
@@ -52,4 +39,8 @@ module.exports = async ctx => {
     retData['kills'] = d
     ctx.state.data = retData
   })
+  
+
+
+
 }
