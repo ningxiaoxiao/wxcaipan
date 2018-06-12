@@ -1,12 +1,34 @@
 <!-- referee.wxml -->
 <view class="container">
-  <view class="section">
-    <picker bindchange="bindPickerTeamChange" range-key="name" value="{{curTeamid}}" range="{{allTeams}}">
-      <div class="picker">
-        <div class="pickerhead">选择队伍</div>
-        <div class="pickercontent">{{allTeams[curTeamid].id+'-'+allTeams[curTeamid].name}}</div>
-      </div>
-    </picker>
-  </view>
-  <button type="primary" bindtap="goTeam">确认</button>
+ <!-- 选择队伍-->
+  <picker bindchange="bindPickerTeamChange" range-key="name" value="{{teamindex}}" range="{{allTeams}}">
+    <div class="picker">
+      <div class="pickerhead">选择队伍</div>
+      <div class="pickercontent">{{allTeams[teamindex].id+'-'+allTeams[teamindex].name}}</div>
+    </div>
+  </picker>
+   <!-- 选择进程-->
+  <picker bindchange="bindRoundIndexChange" value="{{roundindex}}" range="{{round}}" range-key="name">
+    <div class="picker">
+      <div class="pickerhead">选择进程</div>
+      <div class="pickercontent"  > {{round[roundindex].name}}</div>
+    </div>
+  </picker>
+  <!-- team rank -->
+  <div class="rank">
+    <div class="pickerhead">本局排名</div>
+    <input class="rankcontent" bindinput="onrankinputchange" maxlength="2" value="{{rank}}" type="number" placeholder="本局排名" />
+    <div class="updaterank" bindtap="updaterank">更新</div>
+  </div>
+  <!-- 选手表 -->
+  <div class="playerlist">
+    <div class="player" wx:for="{{players}}" wx:key="{{players}}">
+      <div class="playername">{{item.pname}}</div>
+      <div class="kills">{{item.kills+'K'}}</div>
+      <div id="{{index}}" class="subkill" bindtap="subkills">-</div>
+      <div id="{{index}}" class="pluskill" bindtap="matchkills">+</div>
+      <div id="{{index}}" class="knockout" bindtap="knockout">淘汰</div>
+    </div>
+    <button  type="warn" bindtap="send">全队淘汰</button>
+  </div>
 </view>

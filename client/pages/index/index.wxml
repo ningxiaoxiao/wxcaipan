@@ -17,9 +17,9 @@
   </picker>
   <view>
     <button bindtap="login" type="primary">我是选手</button>
-    <button bindtap="goreferee">我是裁判</button>
+    <button   bindtap="goreferee">我是裁判</button>
   </view>
-
+ 
 
   <!-- 信道连接测试 
   <view class="tunnel">
